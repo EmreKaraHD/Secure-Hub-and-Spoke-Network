@@ -6,35 +6,31 @@ This repository contains a comprehensive **Bicep** implementation of a Secure Hu
 
 ```mermaid
 graph TB
-    subgraph Azure Cloud
-        subgraph Hub VNet [Hub VNet (10.0.0.0/16)]
+    subgraph AzureCloud [Azure Cloud]
+        subgraph HubVNet ["Hub VNet (10.0.0.0/16)"]
             direction TB
             FW[Azure Firewall]
             VPNGW[VPN Gateway]
             DNS[Private DNS]
         end
 
-        subgraph Spoke1 VNet [Spoke 1 VNet (10.1.0.0/16)]
+        subgraph Spoke1VNet ["Spoke 1 VNet (10.1.0.0/16)"]
             direction TB
             VM1[Workload VM]
         end
 
-        subgraph Spoke2 VNet [Spoke 2 VNet (10.2.0.0/16)]
+        subgraph Spoke2VNet ["Spoke 2 VNet (10.2.0.0/16)"]
             direction TB
             VM2[Workload VM]
         end
-
-        %% Peering
-        Hub VNet <-->|VNet Peering| Spoke1 VNet
-        Hub VNet <-->|VNet Peering| Spoke2 VNet
 
         %% Traffic Flow
         VM1 -->|UDR 0.0.0.0/0| FW
         VM2 -->|UDR 0.0.0.0/0| FW
 
         %% Gateway Transit
-        VPNGW -.->|Gateway Transit| Spoke1 VNet
-        VPNGW -.->|Gateway Transit| Spoke2 VNet
+        VPNGW -.->|Gateway Transit| VM1
+        VPNGW -.->|Gateway Transit| VM2
     end
 
     OnPrem[On-Premises Network] <-->|Site-to-Site VPN| VPNGW
